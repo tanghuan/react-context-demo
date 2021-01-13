@@ -1,24 +1,29 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, useRef, createContext, useContext } from "react";
 
 const useSocket = () => {
   const [socket, setSocket] = useState(null);
 
+  const socketRef = useRef(null);
+
   const connect = (uri) => {
-    if (!socket) {
-      setSocket(new WebSocket(uri));
+    if (!socketRef.current) {
+      const client = new WebSocket(uri);
+      setSocket(client);
+      socketRef.current = client;
     }
   };
 
   const disconnect = () => {
-    if (socket) {
-      socket.close();
+    if (socketRef.current) {
+      socketRef.current.close();
       setSocket(null);
+      socketRef.current = null;
     }
   };
 
   const send = (msg) => {
-    if (socket) {
-      socket.send(msg);
+    if (socketRef.current) {
+      socketRef.current.send(msg);
     } else {
       console.error("socket disconnected");
     }
