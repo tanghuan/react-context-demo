@@ -4,14 +4,17 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { CounterProvider } from "./containers/Counter";
+import { SocketProvider } from "./containers/Socket";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <CounterProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <SocketProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SocketProvider>
     </CounterProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import PageOne from "./pages/PageOne";
 import PageTwo from "./pages/PageTwo";
+import WebsocketDemo from "./pages/WebsocketDemo";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
       </Route>
       <Route path={"/page_two"}>
         <PageTwo />
+      </Route>
+      <Route path={"/websocket_demo"}>
+        <WebsocketDemo />
       </Route>
     </Switch>
   );

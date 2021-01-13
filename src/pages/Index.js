@@ -67,6 +67,21 @@ const Index = () => {
           Go PageTwo
         </Button>
       </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <Button
+          style={{ margin: "10px" }}
+          variant="outlined"
+          onClick={() => nav2page("/websocket_demo")}
+        >
+          Go WebSocketDemo
+        </Button>
+      </div>
     </div>
   );
 };
