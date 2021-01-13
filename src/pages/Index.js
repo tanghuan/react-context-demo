@@ -7,7 +7,13 @@ import { useCounterContext } from "../containers/Counter";
 const Index = () => {
   const history = useHistory();
 
-  const { count, reset, increment, decrement } = useCounterContext();
+  const {
+    count,
+    reset,
+    increment,
+    decrement,
+    removeStorageValue,
+  } = useCounterContext();
 
   const nav2page = (path) => history.push(path);
 
@@ -38,6 +44,13 @@ const Index = () => {
           onClick={decrement}
         >
           Decrement
+        </Button>
+        <Button
+          style={{ margin: "10px" }}
+          variant="outlined"
+          onClick={removeStorageValue}
+        >
+          Remove LocalStorage Value
         </Button>
         <Button
           style={{ margin: "10px" }}
