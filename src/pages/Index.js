@@ -19,7 +19,7 @@ const Index = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Index View</h1>
+      <h1 style={{ textAlign: "center" }}>Index View: unstate-next</h1>
       <h3 style={{ textAlign: "center" }}>Count: {count}</h3>
       <div
         style={{

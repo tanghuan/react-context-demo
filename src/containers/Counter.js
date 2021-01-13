@@ -1,5 +1,6 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocalStorage } from "react-use";
+import { createContainer, useContainer } from "unstated-next";
 
 const storageValueKey = "count";
 
@@ -27,11 +28,12 @@ const useCounter = (initialState = 0) => {
   return { count, reset, increment, decrement, removeStorageValue };
 };
 
-const Counter = createContext();
+const Counter = createContainer(useCounter);
 
 export const CounterProvider = ({ children }) => {
-  const value = useCounter();
-  return <Counter.Provider value={value}>{children}</Counter.Provider>;
+  return <Counter.Provider>{children}</Counter.Provider>;
 };
 
-export const useCounterContext = () => useContext(Counter);
+// export const useCounterContext = Counter.useContainer;
+
+export const useCounterContext = () => useContainer(Counter);
