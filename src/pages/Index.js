@@ -2,18 +2,32 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
-import { useCounterContext } from "../containers/Counter";
+// import { useCounterContext } from "../containers/Counter";
+
+import {
+  useCounterValue,
+  useCounterReset,
+  useCounterIncrement,
+  useCounterDecrement,
+  useCounterRemoveStorageValue,
+} from "../containers/Counter";
 
 const Index = () => {
   const history = useHistory();
 
-  const {
-    count,
-    reset,
-    increment,
-    decrement,
-    removeStorageValue,
-  } = useCounterContext();
+  // const {
+  //   count,
+  //   reset,
+  //   increment,
+  //   decrement,
+  //   removeStorageValue,
+  // } = useCounterContext();
+
+  const count = useCounterValue();
+  const reset = useCounterReset();
+  const increment = useCounterIncrement();
+  const decrement = useCounterDecrement();
+  const removeStorageValue = useCounterRemoveStorageValue();
 
   const nav2page = (path) => history.push(path);
 

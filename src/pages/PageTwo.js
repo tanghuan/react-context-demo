@@ -2,12 +2,22 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
-import { useCounterContext } from "../containers/Counter";
+// import { useCounterContext } from "../containers/Counter";
+import {
+  useCounterValue,
+  useCounterReset,
+  useCounterIncrement,
+  useCounterDecrement,
+} from "../containers/Counter";
 
 const PageTwo = () => {
   const history = useHistory();
 
-  const { count, reset, increment, decrement } = useCounterContext();
+  // const { count, reset, increment, decrement } = useCounterContext();
+  const count = useCounterValue();
+  const reset = useCounterReset();
+  const increment = useCounterIncrement();
+  const decrement = useCounterDecrement();
 
   const goBack = () => history.goBack();
 

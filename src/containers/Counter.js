@@ -28,4 +28,21 @@ const useCounter = ({ initialState = 0 }) => {
   return { count, reset, increment, decrement, removeStorageValue };
 };
 
-export const [CounterProvider, useCounterContext] = constate(useCounter);
+// export const [CounterProvider, useCounterContext] = constate(useCounter);
+
+// 添加 filter
+export const [
+  CounterProvider,
+  useCounterValue,
+  useCounterReset,
+  useCounterIncrement,
+  useCounterDecrement,
+  useCounterRemoveStorageValue,
+] = constate(
+  useCounter,
+  (value) => value.count,
+  (value) => value.reset,
+  (value) => value.increment,
+  (value) => value.decrement,
+  (value) => value.removeStorageValue
+);
