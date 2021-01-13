@@ -15,11 +15,23 @@ const WebsocketDemo = () => {
 
   // 创建链接
   useEffect(() => {
-    connect("ws://127.0.0.1:8000/socket");
+    connect("wss://echo.websocket.org/");
     return () => {
       disconnect();
     };
   }, []);
+
+  // 保持活性
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (socket) {
+  //       send("ping");
+  //     }
+  //   }, 30000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [socket, send]);
 
   // 监听数据
   useEffect(() => {
@@ -47,7 +59,7 @@ const WebsocketDemo = () => {
       >
         <Button
           variant="outlined"
-          onClick={() => connect("ws://127.0.0.1:8000/socket")}
+          onClick={() => connect("wss://echo.websocket.org/")}
           style={{ margin: "10px" }}
         >
           Connect
