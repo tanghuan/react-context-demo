@@ -1,9 +1,10 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocalStorage } from "react-use";
+import constate from "constate";
 
 const storageValueKey = "count";
 
-const useCounter = (initialState = 0) => {
+const useCounter = ({ initialState = 0 }) => {
   const [
     storageValue,
     setStorageValue,
@@ -27,11 +28,4 @@ const useCounter = (initialState = 0) => {
   return { count, reset, increment, decrement, removeStorageValue };
 };
 
-const Counter = createContext();
-
-export const CounterProvider = ({ children }) => {
-  const value = useCounter();
-  return <Counter.Provider value={value}>{children}</Counter.Provider>;
-};
-
-export const useCounterContext = () => useContext(Counter);
+export const [CounterProvider, useCounterContext] = constate(useCounter);
