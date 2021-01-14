@@ -18,7 +18,6 @@ const useAuth = ({ initialState = { isAuth: false } }) => {
     console.log("res ===> ", res);
 
     const payload = jwtdecode(res.data.token, { header: false });
-    console.log("payload = ", payload);
     const auth = { ...payload, isAuth: true, token: res.data.token };
     setAuth(auth);
     setValue(auth);

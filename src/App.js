@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       <Switch>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/logout">
+          <Logout />
         </Route>
         <ProtectedRoute path="/">
           <Layout />
