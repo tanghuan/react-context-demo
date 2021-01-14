@@ -6,6 +6,12 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
+import Fade from "@material-ui/core/Fade";
 
 import LockIcon from "@material-ui/icons/Lock";
 
@@ -49,7 +55,7 @@ const validationSchema = yup.object({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { login } = useAuthContainer();
+  const { isLoading, isError, error, login } = useAuthContainer();
   const formik = useFormik({
     initialValues: {
       username: "tanghuan",
@@ -61,8 +67,31 @@ const Login = () => {
       history.push("/");
     },
   });
+
+  const [isSnackbarOpen, setIsSnackbarOpen] = React.useState(isError);
+
   return (
     <Container maxWidth="xs">
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={6000}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        onClose={() => setIsSnackbarOpen(false)}
+      >
+        <Alert severity="error">{error && error.message}</Alert>
+      </Snackbar>
+      <Dialog
+        open={isLoading}
+        aria-labelledby="progress-dialog"
+        TransitionComponent={Fade}
+      >
+        <DialogContent>
+          <CircularProgress />
+        </DialogContent>
+      </Dialog>
       <div className={classes.box}>
         <Avatar className={classes.avatar}>
           <LockIcon />
