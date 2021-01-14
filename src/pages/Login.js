@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
@@ -21,6 +21,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 
 import { useAuthContainer } from "../containers/Auth";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -52,14 +53,19 @@ const validationSchema = yup.object({
     .required("Password is required"),
 });
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
 const Login = () => {
   const classes = useStyles();
+  const queryParams = useQuery();
   const history = useHistory();
   const { loading, error, login } = useAuthContainer();
   const formik = useFormik({
     initialValues: {
-      username: "tanghuan",
-      password: "admin",
+      username: queryParams.get("username") || "",
+      password: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -99,7 +105,7 @@ const Login = () => {
         <Typography variant="h5" component="h2" gutterBottom>
           Login
         </Typography>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
           <TextField
             id="username"
             label="username"
@@ -110,6 +116,7 @@ const Login = () => {
             fullWidth
             value={formik.values.username}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={formik.touched.username && Boolean(formik.errors.username)}
             helperText={formik.touched.username && formik.errors.username}
           />
@@ -124,19 +131,38 @@ const Login = () => {
             fullWidth
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            size="large"
-            fullWidth
-            className={classes.btn}
-          >
-            Submit
-          </Button>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                size="large"
+                fullWidth
+                className={classes.btn}
+                disabled={formik.isSubmitting}
+              >
+                Submit
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                color="default"
+                type="reset"
+                size="large"
+                fullWidth
+                className={classes.btn}
+                disabled={formik.isSubmitting}
+              >
+                Reset
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </div>
     </Container>
