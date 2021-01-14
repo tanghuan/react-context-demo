@@ -55,7 +55,7 @@ const validationSchema = yup.object({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { isLoading, isError, error, login } = useAuthContainer();
+  const { isLoading, error, login } = useAuthContainer();
   const formik = useFormik({
     initialValues: {
       username: "tanghuan",
@@ -68,12 +68,12 @@ const Login = () => {
     },
   });
 
-  const [isSnackbarOpen, setIsSnackbarOpen] = React.useState(isError);
+  const [isSnackbarOpen, setIsSnackbarOpen] = React.useState(error);
 
   return (
     <Container maxWidth="xs">
       <Snackbar
-        open={isSnackbarOpen}
+        open={!!isSnackbarOpen}
         autoHideDuration={6000}
         anchorOrigin={{
           vertical: "top",

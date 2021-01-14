@@ -10,12 +10,10 @@ const useAuth = ({ initialState = { isAuth: false } }) => {
   const [auth, setAuth] = React.useState(() => value || initialState);
   const [error, setError] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isError, setIsError] = React.useState(false);
 
   const login = async (data) => {
     setError(null);
     setIsLoading(true);
-    setIsError(false);
     await axios({
       url: "/api/login",
       method: "POST",
@@ -35,7 +33,6 @@ const useAuth = ({ initialState = { isAuth: false } }) => {
       .catch((err) => {
         const resData = err.response && err.response.data;
         console.log(resData);
-        setIsError(true);
         setError(resData);
         setIsLoading(false);
       });
@@ -47,7 +44,7 @@ const useAuth = ({ initialState = { isAuth: false } }) => {
     setValue(initialState);
   };
 
-  return { auth, isLoading, isError, error, login, logout };
+  return { auth, isLoading, error, login, logout };
 };
 
 export const [AuthProvider, useAuthContainer] = constate(useAuth);
