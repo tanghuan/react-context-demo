@@ -55,7 +55,7 @@ const validationSchema = yup.object({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { isLoading, error, login } = useAuthContainer();
+  const { loading, error, login } = useAuthContainer();
   const formik = useFormik({
     initialValues: {
       username: "tanghuan",
@@ -84,7 +84,7 @@ const Login = () => {
         <Alert severity="error">{error && error.message}</Alert>
       </Snackbar>
       <Dialog
-        open={isLoading}
+        open={loading}
         aria-labelledby="progress-dialog"
         TransitionComponent={Fade}
       >
