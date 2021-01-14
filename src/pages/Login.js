@@ -57,7 +57,7 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      login(values);
+      await login(values);
       history.push("/");
     },
   });

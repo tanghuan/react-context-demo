@@ -1,13 +1,12 @@
 import React from "react";
-import { useLocalStorage } from "react-use";
+import { useLocalStorageState } from "ahooks";
 import constate from "constate";
 import axios from "axios";
 import jwtdecode from "jwt-decode";
 
 const useAuth = ({ initialState = { isAuth: false } }) => {
-  const [value, setValue] = useLocalStorage("auth", initialState, {
-    raw: false,
-  });
+  const [value, setValue] = useLocalStorageState("auth", initialState);
+
   const [auth, setAuth] = React.useState(() => value || initialState);
 
   const login = async (data) => {

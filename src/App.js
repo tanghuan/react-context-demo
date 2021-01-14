@@ -12,7 +12,7 @@ function App() {
     <React.Fragment>
       <CssBaseline />
       <Switch>
-        <Route path={"/login"}>
+        <Route path="/login">
           <Login />
         </Route>
         <ProtectedRoute path="/">
