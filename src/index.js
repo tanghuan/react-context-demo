@@ -2,20 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
+import { AuthProvider } from "./containers/Auth";
 import App from "./App";
-import { CounterProvider } from "./containers/Counter";
-import { SocketProvider } from "./containers/Socket";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CounterProvider>
-      <SocketProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </SocketProvider>
-    </CounterProvider>
+    <AuthProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

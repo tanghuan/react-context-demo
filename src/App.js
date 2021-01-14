@@ -1,26 +1,25 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import PageOne from "./pages/PageOne";
-import PageTwo from "./pages/PageTwo";
-import WebsocketDemo from "./pages/WebsocketDemo";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import Layout from "./pages/Layout";
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <Switch>
-      <Route path="/" exact>
-        <Index />
-      </Route>
-      <Route path={"/page_one"}>
-        <PageOne />
-      </Route>
-      <Route path={"/page_two"}>
-        <PageTwo />
-      </Route>
-      <Route path={"/websocket_demo"}>
-        <WebsocketDemo />
-      </Route>
-    </Switch>
+    <React.Fragment>
+      <CssBaseline />
+      <Switch>
+        <Route path={"/login"}>
+          <Login />
+        </Route>
+        <ProtectedRoute path="/">
+          <Layout />
+        </ProtectedRoute>
+      </Switch>
+    </React.Fragment>
   );
 }
 
